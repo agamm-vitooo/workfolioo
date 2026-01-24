@@ -75,7 +75,7 @@ const WorkSection = () => {
             <img
               src={exp.logo}
               alt={exp.company}
-              className="w-14 h-14 object-contain rounded-md border"
+              className="w-14 h-14 object-contain rounded-md"
             />
 
             {/* Info */}
@@ -122,7 +122,7 @@ const WorkSection = () => {
                 <img
                   src={selectedExp.logo}
                   alt={selectedExp.company}
-                  className="w-12 h-12 object-contain rounded-md border"
+                  className="w-12 h-12 object-contain rounded-md"
                 />
 
                 <div>

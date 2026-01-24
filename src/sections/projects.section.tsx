@@ -68,7 +68,7 @@ const ProjectSection = () => {
               <img
                 src={project.image}
                 alt={project.name}
-                className="w-14 h-14 object-contain rounded-md border"
+                className="w-14 h-14 object-contain rounded-md"
               />
             </div>
 
@@ -119,7 +119,7 @@ const ProjectSection = () => {
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.name}
-                  className="w-12 h-12 object-contain rounded-md border"
+                  className="w-12 h-12 object-contain rounded-md"
                 />
 
                 <div>
