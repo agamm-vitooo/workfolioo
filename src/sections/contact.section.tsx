@@ -7,12 +7,12 @@ import { SiGmail } from "react-icons/si";
 gsap.registerPlugin(ScrollTrigger);
 
 const ContactSection = () => {
-  const sectionRef = useRef(null);
-  const headingRef = useRef(null);
-  const paragraphRef = useRef(null);
-  const emailRef = useRef(null);
-  const iconsRef = useRef(null);
-  const cardRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const emailRef = useRef<HTMLDivElement>(null);
+  const iconsRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,7 +46,7 @@ const ContactSection = () => {
       );
 
       tl.fromTo(
-        iconsRef.current.children,
+        iconsRef.current!.children, // pakai ! karena yakin tidak null
         { scale: 0, opacity: 0, rotation: -180 },
         {
           scale: 1,
@@ -160,8 +160,15 @@ const ContactSection = () => {
 };
 
 /* ICON COMPONENT */
-const SocialIcon = ({ href, children, color, title }) => {
-  const iconRef = useRef(null);
+interface SocialIconProps {
+  href: string;
+  children: React.ReactNode;
+  color?: string;
+  title?: string;
+}
+
+const SocialIcon: React.FC<SocialIconProps> = ({ href, children, color = "", title = "" }) => {
+  const iconRef = useRef<HTMLAnchorElement>(null);
 
   const handleMouseEnter = () => {
     gsap.to(iconRef.current, {
