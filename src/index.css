@@ -1,0 +1,29 @@
+:root {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 14px;
+
+  color-scheme: light dark;
+  background-color: #F9FAFB;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Import varian font yang dibutuhkan */
+@import "@fontsource/plus-jakarta-sans/400.css"; /* Regular */
+@import "@fontsource/plus-jakarta-sans/500.css"; /* Medium */
+@import "@fontsource/plus-jakarta-sans/600.css"; /* Semi-Bold */
+@import "@fontsource/plus-jakarta-sans/700.css"; /* Bold */
