@@ -46,7 +46,7 @@ const ContactSection = () => {
       );
 
       tl.fromTo(
-        iconsRef.current!.children, // pakai ! karena yakin tidak null
+        iconsRef.current!.children,
         { scale: 0, opacity: 0, rotation: -180 },
         {
           scale: 1,
@@ -107,7 +107,7 @@ const ContactSection = () => {
           </div>
 
           {/* ICONS */}
-          <div ref={iconsRef} className="flex gap-5">
+          <div ref={iconsRef} className="flex gap-5 mb-6">
             <SocialIcon href="https://www.instagram.com/agamm.i/" color="hover:bg-pink-500" title="Instagram">
               <FaInstagram />
             </SocialIcon>
@@ -127,10 +127,10 @@ const ContactSection = () => {
         </div>
 
         {/* KANAN - CARD */}
-        <div className="hidden lg:block">
+        <div className="block">
           <div
             ref={cardRef}
-            className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl p-12 shadow-lg"
+            className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl p-8 md:p-12 shadow-lg"
           >
             <h3 className="text-2xl font-semibold text-slate-800 mb-4">
               Ready to start a project?
@@ -146,7 +146,7 @@ const ContactSection = () => {
               href="https://mail.google.com/mail/?view=cm&fs=1&to=agamvito7@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-black text-white hover:bg-slate-800 transition shadow-lg"
+              className="inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-black text-white hover:bg-slate-800 transition shadow-lg"
             >
               <SiGmail className="text-xl" />
               Send me an email
