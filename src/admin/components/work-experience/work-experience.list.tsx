@@ -7,7 +7,7 @@ interface Props {
   data: WorkExperience[];
   loading: boolean;
   onEdit: (data: WorkExperience) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 const WorkExperienceList = ({
@@ -31,7 +31,7 @@ const WorkExperienceList = ({
   }
 
   // DELETE CONFIRM
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     toast(
       <div className="flex flex-col gap-4">
         <div>

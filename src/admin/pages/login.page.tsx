@@ -15,18 +15,15 @@ import { toast } from "sonner";
 import { auth }
 from "../../firebase/firebase";
 
-import { useNavigate }
-from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import LoginImage
-from "../../assets/login.JPG.jpeg";
+import LoginImage from "../../assets/login.JPG.jpeg";
 
 const LoginPage = () => {
-
   const navigate = useNavigate();
 
-  const [email, setEmail] =
-    useState("");
+  const [email, setEmail] = useState("");
+
 
   const [password, setPassword] =
     useState("");
@@ -240,35 +237,56 @@ const LoginPage = () => {
 
             </div>
 
-            {/* BUTTON */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="
-                w-full
-                flex
-                items-center
-                justify-center
-                gap-2
-                bg-slate-900
-                hover:bg-slate-800
-                text-white
-                font-semibold
-                py-4
-                rounded-2xl
-                transition
-                disabled:opacity-70
-                disabled:cursor-not-allowed
-              "
-            >
+            {/* BUTTONS */}
+            <div className="flex flex-col gap-3">
+              <button
+                type="submit"
+                disabled={loading}
+                className="
+                  w-full
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  bg-slate-900
+                  hover:bg-slate-800
+                  text-white
+                  font-semibold
+                  py-4
+                  rounded-2xl
+                  transition
+                  disabled:opacity-70
+                  disabled:cursor-not-allowed
+                "
+              >
+                <LogIn className="w-5 h-5" />
+                {loading ? "Loading..." : "Login"}
+              </button>
 
-              <LogIn className="w-5 h-5" />
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="
+                  w-full
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  bg-white
+                  border
+                  border-slate-200
+                  hover:bg-slate-50
+                  text-slate-700
+                  font-semibold
+                  py-4
+                  rounded-2xl
+                  transition
+                "
+              >
+                Home
+              </button>
+            </div>
 
-              {loading
-                ? "Loading..."
-                : "Login"}
-
-            </button>
 
           </form>
 

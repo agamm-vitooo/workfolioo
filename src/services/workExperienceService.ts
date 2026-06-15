@@ -1,68 +1,44 @@
+import { db } from "../firebase/firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import type { WorkExperience } from "../types/workExperience";
 
-const API_URL = import.meta.env.VITE_APP_SCRIPT_URL;
+const COLLECTION = "work_experience";
 
-const SHEET = "work_experience";
-
-export const getWorkExperiences = async (): Promise<
-  WorkExperience[]
-> => {
-
-  const res = await fetch(
-    `${API_URL}?sheet=${SHEET}`
-  );
-
-  const result = await res.json();
-
-  return result.data || [];
+const converter = {
+  toFirestore: (data: WorkExperience) => {
+    const { id, ...rest } = data;
+    return rest;
+  },
+  fromFirestore: (snapshot: any, options: any): WorkExperience => {
+    const data = snapshot.data(options);
+    return { id: snapshot.id, ...data } as WorkExperience;
+  },
 };
 
-export const createWorkExperience = async (
-  data: WorkExperience
-) => {
+const col = collection(db, COLLECTION).withConverter(converter);
 
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "create",
-      sheet: SHEET,
-      data,
-    }),
-  });
-
-  return res.json();
+export const getWorkExperiences = async (): Promise<WorkExperience[]> => {
+  const snapshot = await getDocs(col);
+  return snapshot.docs.map((doc) => doc.data());
 };
 
-export const updateWorkExperience = async (
-  id: number,
-  data: Partial<WorkExperience>
-) => {
-
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "update",
-      sheet: SHEET,
-      id,
-      data,
-    }),
-  });
-
-  return res.json();
+export const createWorkExperience = async (data: Omit<WorkExperience, "id">): Promise<string> => {
+  const docRef = await addDoc(col, data);
+  return docRef.id;
 };
 
-export const deleteWorkExperience = async (
-  id: number
-) => {
+export const updateWorkExperience = async (id: string, data: Partial<WorkExperience>) => {
+  const { id: _, ...cleanData } = data as any;
+  await updateDoc(doc(db, COLLECTION, id), cleanData);
+};
 
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "delete",
-      sheet: SHEET,
-      id,
-    }),
-  });
-
-  return res.json();
+export const deleteWorkExperience = async (id: string) => {
+  await deleteDoc(doc(db, COLLECTION, id));
 };

@@ -4,7 +4,7 @@ import type { WorkExperience } from "../../../types/workExperience";
 interface Props {
   data: WorkExperience;
   onEdit: (data: WorkExperience) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 const WorkExperienceCard = ({ data, onEdit, onDelete }: Props) => {

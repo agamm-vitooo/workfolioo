@@ -1,5 +1,5 @@
 export interface WorkExperience {
-  id: number;
+  id: string;
   company: string;
   logo: string;
   title: string;

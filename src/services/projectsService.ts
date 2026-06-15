@@ -1,65 +1,44 @@
+import { db } from "../firebase/firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import type { Project } from "../types/project";
 
-const API_URL = import.meta.env.VITE_APP_SCRIPT_URL;
+const COLLECTION = "projects";
 
-const SHEET = "projects";
+const projectConverter = {
+  toFirestore: (project: Project) => {
+    const { id, ...data } = project;
+    return data;
+  },
+  fromFirestore: (snapshot: any, options: any): Project => {
+    const data = snapshot.data(options);
+    return { id: snapshot.id, ...data } as Project;
+  },
+};
+
+const col = collection(db, COLLECTION).withConverter(projectConverter);
 
 export const getProjects = async (): Promise<Project[]> => {
-  const res = await fetch(
-    `${API_URL}?sheet=${SHEET}`
-  );
-
-  const result = await res.json();
-
-  return result.data || [];
+  const snapshot = await getDocs(col);
+  return snapshot.docs.map((doc) => doc.data());
 };
 
-export const createProject = async (
-  data: Project
-) => {
-
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "create",
-      sheet: SHEET,
-      data,
-    }),
-  });
-
-  return res.json();
+export const createProject = async (data: Omit<Project, "id">): Promise<string> => {
+  const docRef = await addDoc(col, data);
+  return docRef.id;
 };
 
-export const updateProject = async (
-  id: number,
-  data: Partial<Project>
-) => {
-
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "update",
-      sheet: SHEET,
-      id,
-      data,
-    }),
-  });
-
-  return res.json();
+export const updateProject = async (id: string, data: Partial<Project>) => {
+  const { id: _, ...cleanData } = data as any;
+  await updateDoc(doc(db, COLLECTION, id), cleanData);
 };
 
-export const deleteProject = async (
-  id: number
-) => {
-
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "delete",
-      sheet: SHEET,
-      id,
-    }),
-  });
-
-  return res.json();
+export const deleteProject = async (id: string) => {
+  await deleteDoc(doc(db, COLLECTION, id));
 };

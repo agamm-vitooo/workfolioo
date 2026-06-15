@@ -2,7 +2,7 @@ import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 
 type Project = {
-  id: number
+  id: string
   name: string
   stack: string
 }

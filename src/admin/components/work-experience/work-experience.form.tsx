@@ -14,7 +14,7 @@ const inputClass =
 
 const WorkExperienceForm = ({ onSuccess }: Props) => {
   const [form, setForm] = useState<WorkExperience>({
-    id: 0,
+    id: "",
     company: "",
     logo: "",
     title: "",
@@ -58,7 +58,7 @@ const WorkExperienceForm = ({ onSuccess }: Props) => {
       toast.success("Work experience added 🚀");
 
       setForm({
-        id: 0,
+        id: "",
         company: "",
         logo: "",
         title: "",

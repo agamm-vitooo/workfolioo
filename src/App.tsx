@@ -16,8 +16,6 @@ import ProjectsPage from "./admin/pages/projects.page";
 import CertificatesPage from "./admin/pages/certificates.page";
 import WorkPage from "./admin/pages/work.page";
 
-import "./App.css";
-
 const App: React.FC = () => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);

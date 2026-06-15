@@ -1,63 +1,44 @@
+import { db } from "../firebase/firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import type { Certificate } from "../types/certificate";
 
-const API_URL = import.meta.env.VITE_APP_SCRIPT_URL;
+const COLLECTION = "certificates";
 
-const SHEET = "certificates";
-
-export const getCertificates = async () => {
-  const res = await fetch(
-    `${API_URL}?sheet=${SHEET}`
-  );
-
-  return res.json();
+const converter = {
+  toFirestore: (data: Certificate) => {
+    const { id, ...rest } = data;
+    return rest;
+  },
+  fromFirestore: (snapshot: any, options: any): Certificate => {
+    const data = snapshot.data(options);
+    return { id: snapshot.id, ...data } as Certificate;
+  },
 };
 
-export const createCertificate = async (
-  data: Certificate
-) => {
+const col = collection(db, COLLECTION).withConverter(converter);
 
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "create",
-      sheet: SHEET,
-      data,
-    }),
-  });
-
-  return res.json();
+export const getCertificates = async (): Promise<Certificate[]> => {
+  const snapshot = await getDocs(col);
+  return snapshot.docs.map((doc) => doc.data());
 };
 
-export const updateCertificate = async (
-  id: number,
-  data: Partial<Certificate>
-) => {
-
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "update",
-      sheet: SHEET,
-      id,
-      data,
-    }),
-  });
-
-  return res.json();
+export const createCertificate = async (data: Omit<Certificate, "id">): Promise<string> => {
+  const docRef = await addDoc(col, data);
+  return docRef.id;
 };
 
-export const deleteCertificate = async (
-  id: number
-) => {
+export const updateCertificate = async (id: string, data: Partial<Certificate>) => {
+  const { id: _, ...cleanData } = data as any;
+  await updateDoc(doc(db, COLLECTION, id), cleanData);
+};
 
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "delete",
-      sheet: SHEET,
-      id,
-    }),
-  });
-
-  return res.json();
+export const deleteCertificate = async (id: string) => {
+  await deleteDoc(doc(db, COLLECTION, id));
 };

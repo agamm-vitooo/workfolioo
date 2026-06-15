@@ -3,6 +3,7 @@ import Hero from "../sections/hero.section";
 import Content from "../views/content";
 import ContactSection from "../sections/contact.section";
 import MapSection from "../sections/map.section";
+import CertificatesSection from "../sections/certificates.section";
 
 const LandingPage: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const LandingPage: React.FC = () => {
         <Hero />
         <MapSection />
         <Content />
+        <CertificatesSection />
         <ContactSection />
       </div>
     </main>
@@ -18,3 +20,4 @@ const LandingPage: React.FC = () => {
 };
 
 export default LandingPage;
+

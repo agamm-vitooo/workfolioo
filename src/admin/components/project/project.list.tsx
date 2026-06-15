@@ -26,7 +26,7 @@ const ProjectList = ({
 }: ProjectListProps) => {
   const [editForm, setEditForm] = useState<Project | null>(null);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     toast(
       <div className="flex flex-col gap-4">
         <div>

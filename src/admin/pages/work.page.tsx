@@ -32,7 +32,7 @@ const WorkPage = () => {
     fetchData();
   }, []);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     await deleteWorkExperience(id);
     fetchData();
   };

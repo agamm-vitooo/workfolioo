@@ -14,7 +14,7 @@ const inputClass =
 
 const ProjectForm = ({ onSuccess }: ProjectFormProps) => {
   const [form, setForm] = useState<Project>({
-    id: 0,
+    id: "",
     name: "",
     image: "",
     stack: "",
@@ -59,7 +59,7 @@ const ProjectForm = ({ onSuccess }: ProjectFormProps) => {
       })
 
       setForm({
-        id: 0,
+        id: "",
         name: "",
         image: "",
         stack: "",
