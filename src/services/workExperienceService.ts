@@ -7,7 +7,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import type { DocumentData, QueryDocumentSnapshot, SnapshotOptions, FirestoreDataConverter } from "firebase/firestore";
+// Removed unused type-only imports
 import type { WorkExperience } from "../types/workExperience";
 
 const COLLECTION = "work_experience";
