@@ -130,7 +130,7 @@ const ContactSection = () => {
         <div className="block">
           <div
             ref={cardRef}
-            className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl p-8 md:p-12 shadow-lg"
+            className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl p-8 md:p-12 shadow-sm border border-slate-200"
           >
             <h3 className="text-2xl font-semibold text-slate-800 mb-4">
               Ready to start a project?
