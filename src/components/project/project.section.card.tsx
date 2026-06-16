@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react";
 import type { Project } from "../../types/project";
 
 interface Props {
@@ -9,29 +10,34 @@ export default function ProjectCard({ project, onClick }: Props) {
   return (
     <div
       onClick={onClick}
-      className="flex cursor-pointer items-center gap-5 rounded-lg border border-slate-200 p-5 transition hover:bg-slate-50 hover:shadow-md"
+      className="group flex cursor-pointer items-center gap-4 rounded-xl border border-slate-200 p-4 transition-colors hover:border-slate-300 hover:bg-slate-50"
     >
       {/* IMAGE */}
       <img
         src={project.image}
         alt={project.name}
-        className="h-14 w-14 rounded-md object-cover"
+        className="h-12 w-12 shrink-0 rounded-lg object-cover"
       />
 
       {/* CONTENT */}
-      <div className="flex-1">
-        <h3 className="text-lg font-semibold text-slate-800">
+      <div className="min-w-0 flex-1">
+        <h3 className="truncate text-base font-medium text-slate-800">
           {project.name}
         </h3>
 
-        <p className="text-sm text-slate-500">
+        <p className="truncate text-sm text-slate-500">
           {project.stack}
         </p>
-
-        <p className="mt-1 text-xs text-slate-400">
-          Click for details →
-        </p>
       </div>
+
+      {/* INDICATOR */}
+      <ChevronRight
+        className="
+          h-4 w-4 shrink-0 text-slate-300
+          transition-transform duration-300
+          group-hover:translate-x-0.5 group-hover:text-slate-400
+        "
+      />
     </div>
   );
 }

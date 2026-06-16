@@ -6,9 +6,12 @@ interface Props {
   onSelect: (project: Project) => void;
 }
 
-export default function ProjectList({ projects, onSelect }: Props) {
+export default function ProjectList({
+  projects,
+  onSelect,
+}: Props) {
   return (
-    <div className="space-y-4">
+    <div className="flex w-full flex-col gap-4">
       {projects.map((project) => (
         <ProjectCard
           key={project.id}
