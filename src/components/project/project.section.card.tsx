@@ -9,7 +9,7 @@ export default function ProjectCard({ project, onClick }: Props) {
   return (
     <div
       onClick={onClick}
-      className="flex cursor-pointer items-center gap-5 rounded-lg border border-slate-100 p-5 transition hover:bg-slate-50 hover:shadow-md"
+      className="flex cursor-pointer items-center gap-5 rounded-lg border border-slate-200 p-5 transition hover:bg-slate-50 hover:shadow-md"
     >
       {/* IMAGE */}
       <img

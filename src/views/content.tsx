@@ -1,12 +1,12 @@
 import WorkSection from "../sections/work.section";
 import ProjectSection from "../sections/projects.section";
+import CertificatesSection from "../sections/certificates.section";
 import { FaLinkedin } from "react-icons/fa";
 
 const Content = () => {
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        
         {/* KIRI - WORK */}
         <div>
           <WorkSection />
@@ -17,10 +17,14 @@ const Content = () => {
           <ProjectSection />
         </div>
 
+        {/* BAWAH - CERTIFICATES */}
+        <div className="lg:col-span-2">
+          <CertificatesSection />
+        </div>
       </div>
 
       {/* BAWAH TENGAH - LEARN MORE */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-12">
         <a
           href="https://www.linkedin.com/in/agam-vito-7b4982205/"
           target="_blank"

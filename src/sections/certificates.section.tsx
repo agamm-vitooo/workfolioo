@@ -25,7 +25,9 @@ const CertificatesSection = () => {
 
   return (
     <section id="certificates" className="py-16">
-      <h2 className="mb-8 text-2xl font-bold text-slate-800">Certificates</h2>
+      <h2 className="mb-8 text-2xl font-bold text-slate-800">
+        Certificates
+      </h2>
 
       {loading ? (
         <p className="text-slate-500">Loading certificates...</p>
@@ -36,17 +38,21 @@ const CertificatesSection = () => {
           {certificates.map((c) => (
             <div
               key={c.id}
-              className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all"
+              className="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition-all"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl border border-slate-200 bg-slate-50 overflow-hidden shrink-0">
+                <div className="w-14 h-14 rounded-xl border border-slate-200 bg-slate-50 overflow-hidden shrink-0">
                   {c.image ? (
                     <img
                       src={c.image}
                       alt={c.name}
                       className="w-full h-full object-cover"
                     />
-                  ) : null}
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-xs text-slate-400">
+                      No image
+                    </div>
+                  )}
                 </div>
 
                 <div className="min-w-0">
@@ -78,4 +84,5 @@ const CertificatesSection = () => {
 };
 
 export default CertificatesSection;
+
 

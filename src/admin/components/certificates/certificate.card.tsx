@@ -9,7 +9,7 @@ interface Props {
 
 const CertificateCard = ({ data, onEdit, onDelete }: Props) => {
   return (
-    <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200">
+    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200">
       <div className="flex items-start justify-between gap-4">
         <div className="flex gap-3 items-start">
           {data.image ? (
