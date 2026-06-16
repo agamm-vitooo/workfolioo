@@ -17,7 +17,7 @@ const converter = {
     return rest;
   },
   fromFirestore: (snapshot: any, options: any): Certificate => {
-    const data = snapshot.data(options);
+    const data = snapshot.data(options) as Omit<Certificate, "id">;
     return { id: snapshot.id, ...data } as Certificate;
   },
 };
@@ -35,7 +35,7 @@ export const createCertificate = async (data: Omit<Certificate, "id">): Promise<
 };
 
 export const updateCertificate = async (id: string, data: Partial<Certificate>) => {
-  const { id: _, ...cleanData } = data as any;
+  const { id: _ignoredId, ...cleanData } = data;
   await updateDoc(doc(db, COLLECTION, id), cleanData);
 };
 

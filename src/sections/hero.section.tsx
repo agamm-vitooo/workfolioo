@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import heroImage from "../assets/agam.jpg";
+import heroImage from "../assets/agam.webp";
 
 const Hero = () => {
   return (

@@ -1,8 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 
 import type { WorkExperience } from "../../types/workExperience";
+import { withCloudinaryTransformations } from "../../utils/cloudinary";
 
 interface Props {
+
   experience: WorkExperience | null;
   onClose: () => void;
 }
@@ -39,7 +41,13 @@ export default function WorkModal({
             <div className="mb-6 flex items-start gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100">
                 <img
-                  src={experience.logo}
+                  src={withCloudinaryTransformations(experience.logo, {
+                    f: "auto",
+                    q: "auto",
+                    w: 128,
+                    h: 128,
+                    c: "fill",
+                  })}
                   alt={experience.company}
                   className="h-9 w-9 object-contain"
                 />

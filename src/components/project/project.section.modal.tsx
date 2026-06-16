@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import type { Project } from "../../types/project";
+import { withCloudinaryTransformations } from "../../utils/cloudinary";
+
 
 interface Props {
   project: Project | null;
@@ -30,7 +32,13 @@ export default function ProjectModal({ project, onClose }: Props) {
           {/* HEADER IMAGE */}
           <div className="relative h-64 w-full">
             <img
-              src={project.image}
+              src={withCloudinaryTransformations(project.image, {
+                f: "auto",
+                q: "auto",
+                w: 1200,
+                h: 600,
+                c: "fill",
+              })}
               alt={project.name}
               className="h-full w-full object-cover"
             />

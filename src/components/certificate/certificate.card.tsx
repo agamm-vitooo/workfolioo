@@ -1,6 +1,9 @@
 import { Award, ChevronRight } from "lucide-react";
 
 import type { Certificate } from "../../types/certificate";
+import { withCloudinaryTransformations } from "../../utils/cloudinary";
+
+
 
 interface Props {
   certificate: Certificate;
@@ -26,8 +29,15 @@ export default function CertificateCard({
       <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100">
         {certificate.image ? (
           <img
-            src={certificate.image}
+            src={withCloudinaryTransformations(certificate.image, {
+              f: "auto",
+              q: "auto",
+              w: 120,
+              h: 120,
+              c: "fill",
+            })}
             alt={certificate.name}
+            loading="lazy"
             className="h-full w-full object-cover"
           />
         ) : (

@@ -7,6 +7,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
+import type { DocumentData, QueryDocumentSnapshot, SnapshotOptions, FirestoreDataConverter } from "firebase/firestore";
 import type { WorkExperience } from "../types/workExperience";
 
 const COLLECTION = "work_experience";
@@ -17,7 +18,7 @@ const converter = {
     return rest;
   },
   fromFirestore: (snapshot: any, options: any): WorkExperience => {
-    const data = snapshot.data(options);
+    const data = snapshot.data(options) as Omit<WorkExperience, "id">;
     return { id: snapshot.id, ...data } as WorkExperience;
   },
 };
@@ -35,7 +36,7 @@ export const createWorkExperience = async (data: Omit<WorkExperience, "id">): Pr
 };
 
 export const updateWorkExperience = async (id: string, data: Partial<WorkExperience>) => {
-  const { id: _, ...cleanData } = data as any;
+  const { id: _ignoredId, ...cleanData } = data;
   await updateDoc(doc(db, COLLECTION, id), cleanData);
 };
 

@@ -17,7 +17,7 @@ const projectConverter = {
     return data;
   },
   fromFirestore: (snapshot: any, options: any): Project => {
-    const data = snapshot.data(options);
+    const data = snapshot.data(options) as Omit<Project, "id">;
     return { id: snapshot.id, ...data } as Project;
   },
 };
@@ -35,7 +35,7 @@ export const createProject = async (data: Omit<Project, "id">): Promise<string> 
 };
 
 export const updateProject = async (id: string, data: Partial<Project>) => {
-  const { id: _, ...cleanData } = data as any;
+  const { id: _ignoredId, ...cleanData } = data;
   await updateDoc(doc(db, COLLECTION, id), cleanData);
 };
 

@@ -29,7 +29,23 @@ const WorkPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    let cancelled = false;
+
+    const run = async () => {
+      try {
+        setLoading(true);
+        const res = await getWorkExperiences();
+        if (!cancelled) setData(res);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleDelete = async (id: string) => {

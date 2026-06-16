@@ -3,6 +3,7 @@ import Hero from "../sections/hero.section";
 import Content from "../views/content";
 import ContactSection from "../sections/contact.section";
 import MapSection from "../sections/map.section"
+import { HeroScrollDemo } from "../sections/container.scroll";
 
 const LandingPage: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const LandingPage: React.FC = () => {
         <Hero />
         <MapSection />
         <Content />
+        <HeroScrollDemo />
         <ContactSection />
       </div>
     </main>

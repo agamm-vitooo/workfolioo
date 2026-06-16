@@ -2,6 +2,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Award, ExternalLink } from "lucide-react";
 
 import type { Certificate } from "../../types/certificate";
+import { withCloudinaryTransformations } from "../../utils/cloudinary";
+
 
 interface Props {
   certificate: Certificate | null;
@@ -36,7 +38,13 @@ export default function CertificateModal({
           <div className="relative flex h-44 sm:h-64 items-center justify-center bg-slate-100">
             {certificate.image ? (
               <img
-                src={certificate.image}
+                src={withCloudinaryTransformations(certificate.image, {
+                  f: "auto",
+                  q: "auto",
+                  w: 900,
+                  h: 450,
+                  c: "fill",
+                })}
                 alt={certificate.name}
                 className="h-full w-full object-cover"
               />
@@ -53,7 +61,7 @@ export default function CertificateModal({
           </div>
 
           {/* CONTENT */}
-          <div className="max-h-[calc(90vh-176px)] overflow-y-auto p-4 sm:p-6">
+          <div className="max-h-[calc(90vh-196px)] overflow-y-auto overscroll-contain p-4 sm:p-6">
             {/* TITLE */}
             <h2 className="text-2xl font-bold text-slate-900">
               {certificate.name}

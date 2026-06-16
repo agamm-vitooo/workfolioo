@@ -1,15 +1,16 @@
-# Workfolio - Certificates & Admin CRUD Fix
+# TODO (Workfolio) — Image performance via Cloudinary transforms
 
-## Plan
-1. Fix `src/admin/pages/certificates.page.tsx` to actually render certificate form + list (CRUD) using existing admin components and Firestore services.
-2. Add landing page section for certificates by creating a new section component and including it in `src/pages/landing.page.tsx`.
-3. Verify Firestore services and types: ensure certificates are fetched from `certificates` collection and mapped to UI.
-4. Run typecheck/build to ensure no TS/compile errors.
+- [ ] Create `src/utils/cloudinary.ts` utility to inject Cloudinary transformations into existing image URLs
+- [ ] Update thumbnails:
+  - [ ] `src/components/work/work.section.card.tsx`
+  - [ ] `src/components/project/project.section.card.tsx`
+  - [ ] `src/components/certificate/certificate.card.tsx`
+- [ ] Update modal/hero images:
+  - [ ] `src/components/work/work.section.modal.tsx`
+  - [ ] `src/components/project/project.section.modal.tsx`
+  - [ ] `src/components/certificate/certificate.modal.tsx`
+- [ ] Add `loading="lazy"` to non-critical thumbnails (cards)
+- [x] Sanity check for main Cloudinary thumbnails: updated `Work/Project/Certificate` cards + modals to use Cloudinary transforms.
 
-## Status
-- [x] Implement Admin Certificates CRUD page
-- [x] Implement Landing Certificates section + wire into LandingPage
-- [ ] Build/Typecheck
-
-
+- [ ] Run `npm run lint` and `npm run build`
 

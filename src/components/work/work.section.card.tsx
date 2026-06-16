@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 
 import type { WorkExperience } from "../../types/workExperience";
+import { withCloudinaryTransformations } from "../../utils/cloudinary";
+
 
 interface Props {
   experience: WorkExperience;
@@ -31,8 +33,15 @@ export default function WorkCard({
       <div className="flex flex-col items-center">
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100">
           <img
-            src={experience.logo}
+            src={withCloudinaryTransformations(experience.logo, {
+              f: "auto",
+              q: "auto",
+              w: 128,
+              h: 128,
+              c: "fill",
+            })}
             alt={experience.company}
+            loading="lazy"
             className="h-8 w-8 object-contain"
           />
         </div>

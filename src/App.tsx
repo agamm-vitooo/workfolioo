@@ -17,7 +17,7 @@ import CertificatesPage from "./admin/pages/certificates.page";
 import WorkPage from "./admin/pages/work.page";
 
 const App: React.FC = () => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<import("firebase/auth").User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

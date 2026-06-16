@@ -1,5 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import type { Project } from "../../types/project";
+import { withCloudinaryTransformations } from "../../utils/cloudinary";
+
 
 interface Props {
   project: Project;
@@ -14,8 +16,15 @@ export default function ProjectCard({ project, onClick }: Props) {
     >
       {/* IMAGE */}
       <img
-        src={project.image}
+        src={withCloudinaryTransformations(project.image, {
+          f: "auto",
+          q: "auto",
+          w: 120,
+          h: 120,
+          c: "fill",
+        })}
         alt={project.name}
+        loading="lazy"
         className="h-12 w-12 shrink-0 rounded-lg object-cover"
       />
 

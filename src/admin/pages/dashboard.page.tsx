@@ -9,18 +9,24 @@ const DashboardPage = () => {
   const [isOpen, setIsOpen] = useState(true)
   const [projects, setProjects] = useState<Project[]>([])
 
-  const fetchProjects = async () => {
-    try {
-      const res = await getProjects()
-      setProjects(res?? [])
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   useEffect(() => {
-    fetchProjects()
-  }, [])
+    let cancelled = false;
+
+    const run = async () => {
+      try {
+        const res = await getProjects();
+        if (!cancelled) setProjects(res ?? []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-100">
