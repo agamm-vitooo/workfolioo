@@ -5,15 +5,18 @@ import {
 } from "firebase/auth";
 
 import {
-  Mail,
+  Eye,
+  EyeOff,
   Lock,
   LogIn,
+  Mail,
 } from "lucide-react";
+
 
 import { toast } from "sonner";
 
-import { auth }
-from "../../firebase/firebase";
+import { auth } from "../../firebase/firebase";
+
 
 import { useNavigate } from "react-router-dom";
 
@@ -25,8 +28,9 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
 
 
-  const [password, setPassword] =
-    useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const [loading, setLoading] =
     useState(false);
@@ -207,11 +211,9 @@ const LoginPage = () => {
                 />
 
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
-                  onChange={(e) =>
-                    setPassword(e.target.value)
-                  }
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   className="
                     w-full
@@ -219,7 +221,7 @@ const LoginPage = () => {
                     border-slate-300
                     rounded-2xl
                     pl-12
-                    pr-4
+                    pr-12
                     py-4
                     text-slate-900
                     bg-white
@@ -232,6 +234,20 @@ const LoginPage = () => {
                   "
                   required
                 />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((s) => !s)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
+
 
               </div>
 

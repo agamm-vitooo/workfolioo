@@ -55,10 +55,6 @@ export default function ProjectModal({ project, onClose }: Props) {
               Stack: {project.stack}
             </p>
 
-            {/* DESCRIPTION */}
-            <p className="mt-4 leading-relaxed text-slate-700">
-              {project.description}
-            </p>
 
             {/* LINKS */}
             <div className="mt-6 flex flex-wrap gap-3">
@@ -101,6 +97,7 @@ export default function ProjectModal({ project, onClose }: Props) {
               <div>
                 <span className="font-medium text-slate-700">Description:</span>{" "}
                 {project.description}
+                
               </div>
             </div>
           </div>

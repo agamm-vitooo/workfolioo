@@ -117,9 +117,12 @@ const WorkSection = () => {
                 {selectedExp.period} · {selectedExp.location}
               </p>
 
-              <p className="text-slate-700 leading-relaxed whitespace-pre-line">
-                {selectedExp.description}
-              </p>
+              <div className="max-h-64 overflow-y-auto pr-2">
+                <p className="text-slate-700 leading-relaxed whitespace-pre-line">
+                  {selectedExp.description}
+                </p>
+              </div>
+
             </motion.div>
           </motion.div>
         )}

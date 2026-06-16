@@ -9,7 +9,8 @@ import {
   Briefcase,
   Award,
   LogOut,
-  ChevronRight
+  ChevronRight,
+  Menu
 } from "lucide-react"
 
 interface SidebarProps {
@@ -67,10 +68,28 @@ const SidebarComponent = ({
   return (
     <>
 
-      {/* OVERLAY */}
+      {/* MOBILE HAMBURGER TRIGGER (hanya muncul saat sidebar tertutup di mobile) */}
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="
+            sm:hidden
+            fixed top-4 left-4 z-50
+            flex items-center justify-center
+            w-10 h-10 rounded-xl
+            bg-white shadow-sm border border-gray-100
+            text-gray-500 hover:text-gray-900
+            transition
+          "
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      )}
+
+      {/* OVERLAY (hanya di mobile, sidebar di desktop tidak perlu menggelapkan konten) */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/10 backdrop-blur-sm"
+          className="fixed inset-0 z-30 bg-black/10 backdrop-blur-sm sm:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -81,7 +100,8 @@ const SidebarComponent = ({
           fixed top-0 left-0 h-screen bg-white z-40
           flex flex-col transition-all duration-300 ease-in-out
           border-r border-gray-100 shadow-sm
-          ${isOpen ? "w-56" : "w-16"}
+          ${isOpen ? "w-64 sm:w-56" : "w-16"}
+          ${isOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"}
         `}
       >
 
