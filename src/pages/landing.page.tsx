@@ -6,7 +6,7 @@ import MapSection from "../sections/map.section"
 import { HeroScrollDemo } from "../sections/container.scroll";
 
 import FloatingNavbar from "../components/ui/floating.navbar";
-import { useScrollPosition } from "../hooks/usescrollposition";
+import { useScrollPosition } from "../hooks/useScrollPosition";
 
 const LandingPage: React.FC = () => {
   const showNavbar = useScrollPosition(500);
