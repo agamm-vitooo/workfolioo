@@ -9,7 +9,7 @@ import heroImage from "../assets/agam.webp";
 
 const Hero = () => {
   return (
-    <section className="flex min-h-[60vh] items-center py-20">
+    <section className="flex min-h-screen items-center">
       <div className="mx-auto w-full max-w-3xl px-4">
         <div className="flex flex-col items-center text-center">
           {/* IMAGE */}
