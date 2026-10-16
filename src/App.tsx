@@ -1,76 +1,92 @@
+
+import { useEffect, useState } from "react";
 import {
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-
-import { onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { onAuthStateChanged, type User } from "firebase/auth";
 
 import { auth } from "./firebase/firebase";
 
 import LandingPage from "./pages/landing.page";
+import ProjectsPage from "./pages/project.page";
+import CertificatePage from "./pages/certificate.page";
+
 import LoginPage from "./admin/pages/login.page";
 import DashboardPage from "./admin/pages/dashboard.page";
-import ProjectsPage from "./admin/pages/projects.page";
-import CertificatesPage from "./admin/pages/certificates.page";
+import AdminProjectsPage from "./admin/pages/projects.page";
+import AdminCertificatesPage from "./admin/pages/certificates.page";
 import WorkPage from "./admin/pages/work.page";
 
-const App: React.FC = () => {
-  const [user, setUser] = useState<import("firebase/auth").User | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function App() {
+  const [user, setUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (currentUser) => {
+        setUser(currentUser);
+        setAuthLoading(false);
+      },
+      (error) => {
+        console.error("Firebase auth error:", error);
+        setAuthLoading(false);
+      }
+    );
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p className="text-sm text-slate-500">
+          Memeriksa autentikasi...
+        </p>
+      </div>
+    );
   }
+
+  const protectedPage = (page: React.ReactNode) =>
+    user ? page : <Navigate to="/login" replace />;
 
   return (
     <Routes>
-      {/* PUBLIC */}
+      {/* Public pages */}
       <Route path="/" element={<LandingPage />} />
+      <Route path="/projects" element={<ProjectsPage />} />
+      <Route path="/certificates" element={<CertificatePage />} />
 
-      {/* LOGIN */}
-      <Route path="/login" element={<LoginPage />} />
+      {/* Login */}
+      <Route
+        path="/login"
+        element={
+          user ? <Navigate to="/admin" replace /> : <LoginPage />
+        }
+      />
 
-      {/* ADMIN */}
+      {/* Protected admin pages */}
       <Route
         path="/admin"
-        element={
-          user ? <DashboardPage /> : <Navigate to="/login" />
-        }
+        element={protectedPage(<DashboardPage />)}
       />
-
       <Route
         path="/admin/projects"
-        element={
-          user ? <ProjectsPage /> : <Navigate to="/login" />
-        }
+        element={protectedPage(<AdminProjectsPage />)}
       />
-
       <Route
         path="/admin/certificates"
-        element={
-          user ? <CertificatesPage /> : <Navigate to="/login" />
-        }
+        element={protectedPage(<AdminCertificatesPage />)}
       />
-
       <Route
         path="/admin/work"
-        element={
-          user ? <WorkPage /> : <Navigate to="/login" />
-        }
+        element={protectedPage(<WorkPage />)}
       />
+
+      {/* Unknown route */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
-};
-
-export default App;
+}
