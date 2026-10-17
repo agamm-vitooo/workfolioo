@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -23,21 +24,25 @@ export default function MapSection() {
   const [showGlobalPopup, setShowGlobalPopup] = useState(true);
 
   return (
-    <div className="w-full h-full">
-      {/* HEADER kalau mau bisa dihapus saat dipakai di contact */}
-      <h2 className="mb-1 text-2xl font-semibold text-slate-900">
+    <div className="w-full">
+      {/* Header */}
+      <h2 className="mb-1 text-2xl font-semibold text-slate-900 transition-colors duration-200 dark:text-white">
         Location
       </h2>
 
-      <p className="mb-6 text-sm text-slate-500">
+      <p className="mb-6 text-sm text-slate-500 transition-colors duration-200 dark:text-slate-400">
         Kuningan, Jakarta, Indonesia 🇮🇩
       </p>
 
-      <div className="relative h-[420px] w-full overflow-hidden rounded-2xl border border-slate-200">
+      {/* Map */}
+      <div className="relative h-[420px] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 transition-colors duration-200 dark:border-slate-800 dark:bg-slate-900">
         <Map center={[location.lng, location.lat]} zoom={15}>
           <MapControls />
 
-          <MapMarker longitude={location.lng} latitude={location.lat}>
+          <MapMarker
+            longitude={location.lng}
+            latitude={location.lat}
+          >
             <MarkerContent>
               <div className="relative">
                 <div className="h-3.5 w-3.5 animate-pulse rounded-full bg-blue-600" />
@@ -52,6 +57,7 @@ export default function MapSection() {
                 <p className="text-sm font-medium text-foreground">
                   {location.name}
                 </p>
+
                 <p className="text-xs text-muted-foreground">
                   {location.lat.toFixed(4)}, {location.lng.toFixed(4)}
                 </p>
@@ -59,6 +65,7 @@ export default function MapSection() {
             </MarkerPopup>
           </MapMarker>
 
+          {/* Location Details Popup */}
           {showGlobalPopup && (
             <MapPopup
               longitude={location.lng}
@@ -71,14 +78,23 @@ export default function MapSection() {
                   <h3 className="text-sm font-semibold text-foreground">
                     Location Details
                   </h3>
+
                   <p className="mt-1 text-xs text-muted-foreground">
-                    BPJS Ketenagakerjaan Tower located in the Kuningan business district of Jakarta.
+                    BPJS Ketenagakerjaan Tower located in the Kuningan
+                    business district of Jakarta.
                   </p>
                 </div>
 
                 <button
+                  type="button"
                   onClick={() => setShowGlobalPopup(false)}
-                  className="w-full rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700"
+                  className="
+                    w-full rounded-md bg-blue-600 px-3 py-1.5
+                    text-sm text-white transition-colors
+                    hover:bg-blue-700
+                    focus-visible:outline-none focus-visible:ring-2
+                    focus-visible:ring-blue-500 focus-visible:ring-offset-2
+                  "
                 >
                   Got it
                 </button>

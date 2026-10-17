@@ -48,10 +48,13 @@ export default function CertificatesSection() {
   };
 
   return (
-    <section id="certificates" className="scroll-mt-24">
+    <section
+      id="certificates"
+      className="scroll-mt-24 rounded-3xl bg-[#F9FAFB] py-12 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 sm:py-16"
+    >
       {/* Section Header */}
       <div className="mb-6 flex items-center justify-between sm:mb-8">
-        <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
           Certificates
         </h2>
 
@@ -59,7 +62,7 @@ export default function CertificatesSection() {
           type="button"
           onClick={handleSeeAll}
           disabled={loading || certificates.length === 0}
-          className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-600 transition-colors duration-300 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-40"
+          className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-600 transition-colors duration-300 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-40 dark:text-slate-400 dark:hover:text-white"
         >
           See All
           <FaArrowRight
@@ -76,19 +79,20 @@ export default function CertificatesSection() {
           {[1, 2, 3].map((item) => (
             <div
               key={item}
-              className="animate-pulse overflow-hidden rounded-2xl border border-slate-200 bg-white"
+              className="animate-pulse overflow-hidden rounded-2xl border border-slate-200 bg-white transition-colors dark:border-slate-800 dark:bg-slate-900"
             >
-              <div className="aspect-[16/10] bg-slate-200" />
+              <div className="aspect-[16/10] bg-slate-200 dark:bg-slate-800" />
+
               <div className="space-y-3 p-5">
-                <div className="h-5 w-3/4 rounded bg-slate-200" />
-                <div className="h-3 w-1/2 rounded bg-slate-200" />
-                <div className="h-3 w-1/3 rounded bg-slate-200" />
+                <div className="h-5 w-3/4 rounded bg-slate-200 dark:bg-slate-800" />
+                <div className="h-3 w-1/2 rounded bg-slate-200 dark:bg-slate-800" />
+                <div className="h-3 w-1/3 rounded bg-slate-200 dark:bg-slate-800" />
               </div>
             </div>
           ))}
         </div>
       ) : certificates.length === 0 ? (
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           Belum ada sertifikat.
         </p>
       ) : (

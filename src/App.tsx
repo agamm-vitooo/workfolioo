@@ -19,6 +19,8 @@ import AdminProjectsPage from "./admin/pages/projects.page";
 import AdminCertificatesPage from "./admin/pages/certificates.page";
 import WorkPage from "./admin/pages/work.page";
 
+import { ThemeProvider } from "./context/theme.context";
+
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
@@ -53,40 +55,42 @@ export default function App() {
     user ? page : <Navigate to="/login" replace />;
 
   return (
-    <Routes>
-      {/* Public pages */}
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/projects" element={<ProjectsPage />} />
-      <Route path="/certificates" element={<CertificatePage />} />
+    <ThemeProvider>
+      <Routes>
+        {/* Public pages */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/certificates" element={<CertificatePage />} />
 
-      {/* Login */}
-      <Route
-        path="/login"
-        element={
-          user ? <Navigate to="/admin" replace /> : <LoginPage />
-        }
-      />
+        {/* Login */}
+        <Route
+          path="/login"
+          element={
+            user ? <Navigate to="/admin" replace /> : <LoginPage />
+          }
+        />
 
-      {/* Protected admin pages */}
-      <Route
-        path="/admin"
-        element={protectedPage(<DashboardPage />)}
-      />
-      <Route
-        path="/admin/projects"
-        element={protectedPage(<AdminProjectsPage />)}
-      />
-      <Route
-        path="/admin/certificates"
-        element={protectedPage(<AdminCertificatesPage />)}
-      />
-      <Route
-        path="/admin/work"
-        element={protectedPage(<WorkPage />)}
-      />
+        {/* Protected admin pages */}
+        <Route
+          path="/admin"
+          element={protectedPage(<DashboardPage />)}
+        />
+        <Route
+          path="/admin/projects"
+          element={protectedPage(<AdminProjectsPage />)}
+        />
+        <Route
+          path="/admin/certificates"
+          element={protectedPage(<AdminCertificatesPage />)}
+        />
+        <Route
+          path="/admin/work"
+          element={protectedPage(<WorkPage />)}
+        />
 
-      {/* Unknown route */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        {/* Unknown route */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </ThemeProvider>
   );
 }

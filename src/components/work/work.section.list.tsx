@@ -1,3 +1,4 @@
+
 import type { WorkExperience } from "../../types/workExperience";
 
 import WorkCard from "./work.section.card";
@@ -7,12 +8,9 @@ interface Props {
   onSelect: (experience: WorkExperience) => void;
 }
 
-export default function WorkList({
-  experiences,
-  onSelect,
-}: Props) {
+export default function WorkList({ experiences, onSelect }: Props) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 text-slate-900 transition-colors duration-200 dark:text-slate-100">
       {experiences.map((experience, index) => (
         <WorkCard
           key={experience.id}

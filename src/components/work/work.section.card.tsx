@@ -1,8 +1,8 @@
+
 import { motion } from "framer-motion";
 
 import type { WorkExperience } from "../../types/workExperience";
 import { withCloudinaryTransformations } from "../../utils/cloudinary";
-
 
 interface Props {
   experience: WorkExperience;
@@ -27,11 +27,11 @@ export default function WorkCard({
         delay: index * 0.08,
       }}
       viewport={{ once: true }}
-      className="group flex cursor-pointer gap-4 rounded-2xl p-5 transition-all duration-300 hover:bg-slate-50"
+      className="group flex cursor-pointer gap-4 rounded-2xl p-5 transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-900/70"
     >
       {/* Timeline */}
       <div className="flex flex-col items-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100 transition-colors dark:bg-slate-800">
           <img
             src={withCloudinaryTransformations(experience.logo, {
               f: "auto",
@@ -47,28 +47,28 @@ export default function WorkCard({
         </div>
 
         {!isLast && (
-          <div className="mt-3 h-full w-px bg-slate-200" />
+          <div className="mt-3 h-full w-px bg-slate-200 dark:bg-slate-700" />
         )}
       </div>
 
       {/* Content */}
-      <div className="flex-1 border-b border-slate-100 pb-6">
+      <div className="min-w-0 flex-1 border-b border-slate-100 pb-6 transition-colors dark:border-slate-800">
         <div className="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-slate-900">
+            <h3 className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-slate-700 dark:text-slate-100 dark:group-hover:text-white">
               {experience.title}
             </h3>
 
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
               {experience.company} · {experience.type}
             </p>
 
-            <p className="mt-1 text-sm text-slate-400">
+            <p className="mt-1 text-sm text-slate-400 dark:text-slate-500">
               {experience.location}
             </p>
           </div>
 
-          <span className="mt-2 text-sm text-slate-400 md:mt-0">
+          <span className="mt-2 shrink-0 text-sm text-slate-400 dark:text-slate-500 md:mt-0">
             {experience.period}
           </span>
         </div>
