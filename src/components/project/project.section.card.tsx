@@ -28,26 +28,31 @@ export default function ProjectCard({
         dark:border-slate-800 dark:bg-slate-900
         dark:hover:border-slate-700 dark:hover:bg-slate-800
         dark:focus-visible:ring-offset-slate-950
-        sm:gap-4 sm:p-4
+        sm:gap-4 sm:rounded-2xl sm:p-4
       "
     >
       {/* Image */}
-      <img
-        src={withCloudinaryTransformations(project.image, {
-          f: "auto",
-          q: "auto",
-          w: 120,
-          h: 120,
-          c: "fill",
-        })}
-        alt=""
-        loading="lazy"
+      <div
         className="
-          h-12 w-12 shrink-0 rounded-lg object-cover
-          bg-slate-100 dark:bg-slate-800
-          sm:h-14 sm:w-14
+          h-12 w-12 shrink-0 overflow-hidden
+          rounded-lg bg-slate-100
+          dark:bg-slate-800
+          sm:h-14 sm:w-14 sm:rounded-xl
         "
-      />
+      >
+        <img
+          src={withCloudinaryTransformations(project.image, {
+            f: "auto",
+            q: "auto",
+            w: 120,
+            h: 120,
+            c: "fill",
+          })}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover"
+        />
+      </div>
 
       {/* Content */}
       <div className="min-w-0 flex-1">
@@ -79,8 +84,10 @@ export default function ProjectCard({
         className="
           h-4 w-4 shrink-0 text-slate-300
           transition-all duration-200
-          group-hover:translate-x-0.5 group-hover:text-slate-500
-          dark:text-slate-600 dark:group-hover:text-slate-300
+          group-hover:translate-x-0.5
+          group-hover:text-slate-500
+          dark:text-slate-600
+          dark:group-hover:text-slate-300
           sm:h-5 sm:w-5
         "
       />

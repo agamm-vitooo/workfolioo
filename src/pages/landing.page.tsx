@@ -3,6 +3,7 @@ import React from "react";
 import Hero from "../sections/hero.section";
 import Content from "../views/content";
 import ContactSection from "../sections/contact.section";
+import FooterSection from "../sections/footer.section";
 import { HeroScrollDemo } from "../sections/container.scroll";
 import FloatingNavbar from "../components/ui/floating.navbar";
 import { useScrollPosition } from "../hooks/useScrollPosition";
@@ -19,6 +20,7 @@ const LandingPage: React.FC = () => {
         <Content />
         <HeroScrollDemo />
         <ContactSection />
+        <FooterSection />
       </div>
     </main>
   );
